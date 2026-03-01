@@ -12,12 +12,17 @@
 
   <style>
     :root{
-      --ink:#2b2b2b;
-      --rose:#b47a86;
-      --rose2:#a96f7a;
-      --card: rgba(255,255,255,.62);
-      --shadow: 0 16px 40px rgba(0,0,0,.10);
-      --shadow2: 0 12px 26px rgba(180,122,134,.22);
+      --ink:#24303a;
+
+      /* нежно-голубая палитра */
+      --sky:#8fbfd6;
+      --sky2:#7aaec8;
+      --sky-soft:#eaf4fa;
+
+      --card: rgba(255,255,255,.70);
+      --shadow: 0 16px 40px rgba(0,0,0,.08);
+      --shadow2: 0 14px 28px rgba(143,191,214,.28);
+
       --maxw: 720px;
       --radius: 26px;
     }
@@ -36,13 +41,13 @@
     .bg{
       position:fixed;
       inset:0;
-      background:url("./bg_aquarius.png") center/cover no-repeat fixed;
+      background:url("./Background.png") center/cover no-repeat fixed;
       z-index:-3;
     }
     .veil{
       position:fixed;
       inset:0;
-      background:radial-gradient(1200px 800px at 50% 25%, rgba(255,255,255,.70), rgba(255,255,255,.10));
+      background:radial-gradient(1200px 800px at 50% 25%, rgba(234,244,250,.78), rgba(255,255,255,.12));
       z-index:-2;
       pointer-events:none;
     }
@@ -73,14 +78,14 @@
     /* Type */
     .script{
       font-family:"Great Vibes",cursive;
-      color:var(--rose);
-      text-shadow: 0 10px 26px rgba(180,122,134,.10);
+      color:var(--sky);
+      text-shadow: 0 10px 26px rgba(143,191,214,.25);
     }
     .caps{
       font-family: "Cormorant Garamond", serif;
       text-transform:uppercase;
       letter-spacing:.14em;
-      color:var(--rose2);
+      color:var(--sky2);
       font-size:18px;
       margin:0;
     }
@@ -92,7 +97,7 @@
       height:1px;
       width:min(420px,82%);
       margin:18px auto;
-      background:rgba(0,0,0,.18);
+      background:rgba(0,0,0,.16);
     }
     .p{
       font-size: 20px;
@@ -118,8 +123,8 @@
       border-radius: 28px;
       overflow:hidden;
       box-shadow: 0 18px 48px rgba(0,0,0,.12);
-      border: 1px solid rgba(255,255,255,.40);
-      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.50);
+      background: rgba(255,255,255,.50);
     }
     .hero-img img{
       display:block;
@@ -137,22 +142,26 @@
       align-items:center;
       justify-content:center;
       margin-top:16px;
-      padding: 14px 22px;
+      padding: 14px 24px;
       border-radius: 999px;
-      background: rgba(180,122,134,.86);
+
+      background: linear-gradient(135deg, var(--sky), var(--sky2));
       color:#fff !important;
+
       text-decoration:none !important;
       text-transform: uppercase;
       letter-spacing: .12em;
       font-size: 16px;
+
       box-shadow: var(--shadow2);
-      border: 1px solid rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.45);
       outline:none;
+
       transition: transform .15s ease, filter .15s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover{ filter: brightness(1.03); }
-    .btn:active{ transform: scale(.99); }
+    .btn:hover{ filter: brightness(1.05); }
+    .btn:active{ transform: scale(.98); }
 
     /* Info chips */
     .chips{
@@ -165,12 +174,12 @@
     .chip{
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(143,191,214,.18);
+      border: 1px solid rgba(143,191,214,.30);
       font-size: 15px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.62);
+      color: rgba(0,0,0,.65);
     }
 
     /* Gallery */
@@ -208,13 +217,15 @@
     .g-controls button{
       border:none;
       border-radius:999px;
-      padding: 12px 16px;
+      padding: 12px 18px;
       cursor:pointer;
-      background: rgba(180,122,134,.86);
+
+      background: linear-gradient(135deg, var(--sky), var(--sky2));
       color:#fff;
+
       letter-spacing:.10em;
       text-transform:uppercase;
-      box-shadow: 0 10px 22px rgba(180,122,134,.18);
+      box-shadow: 0 10px 22px rgba(143,191,214,.30);
     }
     .dots{
       display:flex;
@@ -228,7 +239,7 @@
       border: 1px solid rgba(255,255,255,.60);
       cursor:pointer;
     }
-    .dot.on{ background: rgba(180,122,134,.80); }
+    .dot.on{ background: rgba(143,191,214,.90); }
 
     /* Cards grid */
     .grid{
@@ -268,8 +279,8 @@
     .tag{
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(180,122,134,.14);
-      border: 1px solid rgba(180,122,134,.20);
+      background: rgba(143,191,214,.16);
+      border: 1px solid rgba(143,191,214,.28);
       color: rgba(0,0,0,.68);
       letter-spacing:.08em;
       text-transform: uppercase;
@@ -294,13 +305,13 @@
     }
     .unit{ min-width: 86px; text-align:center; }
     .flip{
-      background: rgba(180,122,134,.78);
+      background: linear-gradient(135deg, var(--sky), var(--sky2));
       color:#fff;
       border-radius: 14px;
       padding: 12px 10px;
       font-size: 34px;
       line-height: 1;
-      box-shadow: 0 14px 26px rgba(180,122,134,.18);
+      box-shadow: 0 14px 26px rgba(143,191,214,.28);
       font-variant-numeric: tabular-nums;
     }
     .lab{
@@ -345,9 +356,9 @@
           <p class="caps">Genesis Auto Almaty</p>
           <div class="script hero-title">С 8 Марта</div>
 
-          <!-- Главный портрет (кружочек с цветами) -->
+          <!-- Главное фото -->
           <div class="hero-img">
-            <img src="./hero_diyara.png" alt="Нурбаева Дияра Чингисовна">
+            <img src="./main_picture.png" alt="Нурбаева Дияра Чингисовна">
           </div>
 
           <div class="divider"></div>
@@ -401,7 +412,7 @@
       </div>
     </section>
 
-    <!-- 4) Галерея: Как её видит ИИ -->
+    <!-- 4) Галерея -->
     <section id="gallery">
       <div class="card">
         <div class="script h-script">Как Вас видит ИИ</div>
@@ -409,11 +420,11 @@
 
         <div class="gallery" aria-label="Галерея">
           <div class="g-stage" id="gStage">
-            <img src="./ai_1.png" alt="AI образ 1" class="active">
-            <img src="./ai_2.png" alt="AI образ 2">
-            <img src="./ai_3.png" alt="AI образ 3">
-            <img src="./ai_4.png" alt="AI образ 4">
-            <img src="./ai_5.png" alt="AI образ 5">
+            <img src="./photo_1.png" alt="AI образ 1" class="active">
+            <img src="./photo_2.png" alt="AI образ 2">
+            <img src="./photo_3.png" alt="AI образ 3">
+            <img src="./photo_4.png" alt="AI образ 4">
+            <img src="./photo_5.png" alt="AI образ 5">
           </div>
           <div class="g-controls">
             <button type="button" id="gPrev">Назад</button>
@@ -444,7 +455,7 @@
       </div>
     </section>
 
-    <!-- 6) Натальная карта (мягко, подробнее) -->
+    <!-- 6) Натальная карта -->
     <section id="natal">
       <div class="card">
         <div class="script h-script">Натальная карта — о Вас</div>
@@ -572,7 +583,7 @@
   </main>
 
   <script>
-    // Smooth anchor scroll (optional fallback)
+    // Smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         const id = a.getAttribute('href');
