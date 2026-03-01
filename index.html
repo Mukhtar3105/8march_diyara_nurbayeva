@@ -146,19 +146,31 @@
       margin: 8px 0 0;
       letter-spacing: .01em;
     }
+
+    /* ✅ ВАЖНОЕ ИСПРАВЛЕНИЕ: фиксируем пропорции и центруем картинку */
     .hero-img{
-      width: min(330px, 82vw);
+      width: min(340px, 84vw);
+      aspect-ratio: 4 / 5;            /* держит форму на всех экранах */
       border-radius: 30px;
       overflow:hidden;
       box-shadow: 0 18px 48px rgba(0,0,0,.12);
       border: 1px solid rgba(255,255,255,.58);
-      background: rgba(255,255,255,.20);
+      background: rgba(255,255,255,.18);
+      display:block;
+      position:relative;
     }
     .hero-img img{
-      display:block;
+      position:absolute;
+      inset:0;
       width:100%;
-      height:auto;
+      height:100%;
+      object-fit: cover;              /* если нужно полностью без полей */
+      object-position: center;        /* центрируем */
+      transform: translateZ(0);
+      display:block;
     }
+    /* Если вдруг нужно НЕ обрезать (показывать целиком), замените cover -> contain:
+       object-fit: contain; background останется красивым. */
 
     /* Buttons */
     .btn{
@@ -278,14 +290,12 @@
       transform: scale(1.12);
     }
 
-    /* Text sections inside congrats */
+    /* Text blocks inside congrats */
     .flow{
       text-align:left;
       margin-top: 10px;
     }
-    .flow p{
-      margin: 12px 0 0;
-    }
+    .flow p{ margin: 12px 0 0; }
     .subhead{
       margin-top: 18px;
       font-family:"Cinzel", serif;
@@ -403,7 +413,6 @@
       .unit{ min-width: 78px; }
       .flip{ font-size: 30px; }
       .btn{ font-size: 12px; padding: 14px 22px; }
-      .flow{ text-align:left; }
     }
   </style>
 </head>
@@ -421,7 +430,6 @@
           <p class="caps">Genesis Auto Almaty</p>
           <div class="script hero-title">С 8 Марта</div>
 
-          <!-- Главное фото -->
           <div class="hero-img">
             <img src="./main_picture1.png" alt="Нурбаева Дияра Чингисовна">
           </div>
