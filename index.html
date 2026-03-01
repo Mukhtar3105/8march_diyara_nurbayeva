@@ -12,16 +12,18 @@
 
   <style>
     :root{
-      --ink:#2a2a2a;
+      /* читаемые тексты */
+      --ink: rgba(12,14,16,.90);
+      --ink2: rgba(12,14,16,.74);
 
-      /* Палитра “в цвет фона” (перламутр/пудра) */
+      /* в цвет фона (пудра/перламутр) */
       --accent:#c6a1a8;
       --accent2:#b58f98;
 
-      /* Прозрачные карточки */
-      --cardTop: rgba(255,255,255,.22);
-      --cardBot: rgba(255,255,255,.14);
-      --border: rgba(255,255,255,.40);
+      /* прозрачные карточки */
+      --cardTop: rgba(255,255,255,.26);
+      --cardBot: rgba(255,255,255,.16);
+      --border: rgba(255,255,255,.42);
 
       --shadow: 0 18px 48px rgba(0,0,0,.10);
       --shadow2: 0 14px 30px rgba(198,161,168,.22);
@@ -48,13 +50,12 @@
       z-index:-3;
       transform: scale(1.02);
     }
-    /* “Сшивает” фон и элементы в одну гамму */
     .veil{
       position:fixed;
       inset:0;
       background:
-        radial-gradient(1200px 900px at 50% 18%, rgba(255,255,255,.38), rgba(255,255,255,.06)),
-        linear-gradient(to bottom, rgba(198,161,168,.10), rgba(255,255,255,.05));
+        radial-gradient(1200px 900px at 50% 18%, rgba(255,255,255,.42), rgba(255,255,255,.07)),
+        linear-gradient(to bottom, rgba(198,161,168,.12), rgba(255,255,255,.06));
       z-index:-2;
       pointer-events:none;
     }
@@ -72,7 +73,7 @@
       text-align:center;
     }
 
-    /* Прозрачные блоки */
+    /* Transparent cards */
     .card{
       position:relative;
       background: linear-gradient(180deg, var(--cardTop), var(--cardBot));
@@ -106,7 +107,7 @@
       font-family: "Cinzel", serif;
       text-transform:uppercase;
       letter-spacing:.16em;
-      color: rgba(181,143,152,.92);
+      color: rgba(181,143,152,.95);
       font-size:15px;
       margin:0;
     }
@@ -118,18 +119,18 @@
       height:1px;
       width:min(420px,82%);
       margin:18px auto;
-      background: linear-gradient(to right, transparent, rgba(181,143,152,.55), transparent);
+      background: linear-gradient(to right, transparent, rgba(181,143,152,.60), transparent);
     }
     .p{
       font-size: 20px;
-      line-height: 1.85;
-      color: rgba(0,0,0,.70);
+      line-height: 1.9;
+      color: var(--ink);
       margin: 10px 0 0;
     }
     .small{
       font-size: 16px;
-      line-height: 1.7;
-      color: rgba(0,0,0,.58);
+      line-height: 1.75;
+      color: var(--ink2);
       margin: 10px 0 0;
     }
 
@@ -150,8 +151,8 @@
       border-radius: 30px;
       overflow:hidden;
       box-shadow: 0 18px 48px rgba(0,0,0,.12);
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.58);
+      background: rgba(255,255,255,.20);
     }
     .hero-img img{
       display:block;
@@ -159,7 +160,7 @@
       height:auto;
     }
 
-    /* Buttons (в цвет фона) */
+    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -178,7 +179,7 @@
       font-family: "Cinzel", serif;
 
       box-shadow: var(--shadow2);
-      border: 1px solid rgba(255,255,255,.50);
+      border: 1px solid rgba(255,255,255,.52);
       outline:none;
 
       transition: transform .15s ease, filter .15s ease;
@@ -187,7 +188,7 @@
     .btn:hover{ filter: brightness(1.06); }
     .btn:active{ transform: scale(.985); }
 
-    /* Info chips */
+    /* Chips */
     .chips{
       display:flex;
       flex-wrap:wrap;
@@ -203,7 +204,7 @@
       font-size: 12px;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.60);
+      color: rgba(12,14,16,.70);
       font-family:"Cinzel", serif;
     }
 
@@ -212,7 +213,7 @@
       margin-top: 14px;
       border-radius: 22px;
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,.38);
+      border: 1px solid rgba(255,255,255,.40);
       background: rgba(255,255,255,.14);
       box-shadow: 0 16px 40px rgba(0,0,0,.08);
     }
@@ -221,7 +222,7 @@
       aspect-ratio: 4 / 5;
       width:100%;
       overflow:hidden;
-      background: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.10);
     }
     .g-stage img{
       position:absolute;
@@ -273,11 +274,29 @@
       transition: transform .15s ease, background .15s ease;
     }
     .dot.on{
-      background: rgba(181,143,152,.90);
+      background: rgba(181,143,152,.92);
       transform: scale(1.12);
     }
 
-    /* Cards grid */
+    /* Text sections inside congrats */
+    .flow{
+      text-align:left;
+      margin-top: 10px;
+    }
+    .flow p{
+      margin: 12px 0 0;
+    }
+    .subhead{
+      margin-top: 18px;
+      font-family:"Cinzel", serif;
+      font-size: 13px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(181,143,152,.95);
+      text-align:center;
+    }
+
+    /* Grid */
     .grid{
       display:grid;
       gap: 12px;
@@ -296,18 +315,18 @@
       font-weight:700;
       letter-spacing:.10em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.58);
+      color: rgba(12,14,16,.70);
       margin-bottom: 6px;
       font-size: 12px;
       font-family:"Cinzel", serif;
     }
     .mini .v{
       font-size: 18px;
-      line-height: 1.7;
-      color: rgba(0,0,0,.72);
+      line-height: 1.75;
+      color: rgba(12,14,16,.84);
     }
 
-    /* Compliments */
+    /* Tags */
     .tags{
       display:flex;
       flex-wrap:wrap;
@@ -320,7 +339,7 @@
       border-radius: 999px;
       background: rgba(255,255,255,.16);
       border: 1px solid rgba(198,161,168,.18);
-      color: rgba(0,0,0,.62);
+      color: rgba(12,14,16,.72);
       letter-spacing:.10em;
       text-transform: uppercase;
       font-size: 12px;
@@ -335,7 +354,7 @@
       letter-spacing: .16em;
       text-transform: uppercase;
       margin: 0 0 10px;
-      color: rgba(0,0,0,.58);
+      color: rgba(12,14,16,.68);
       font-family:"Cinzel", serif;
     }
     .digits{
@@ -361,7 +380,7 @@
       font-size: 11px;
       letter-spacing:.16em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.52);
+      color: rgba(12,14,16,.62);
       font-family:"Cinzel", serif;
     }
 
@@ -374,7 +393,7 @@
       font-size: 14px;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.50);
+      color: rgba(12,14,16,.62);
       line-height: 1.7;
       font-family:"Cinzel", serif;
     }
@@ -384,6 +403,7 @@
       .unit{ min-width: 78px; }
       .flip{ font-size: 30px; }
       .btn{ font-size: 12px; padding: 14px 22px; }
+      .flow{ text-align:left; }
     }
   </style>
 </head>
@@ -401,9 +421,9 @@
           <p class="caps">Genesis Auto Almaty</p>
           <div class="script hero-title">С 8 Марта</div>
 
-          <!-- Главное фото: у Вас в имени файла ПРОБЕЛ перед .png -> используем %20 -->
+          <!-- Главное фото -->
           <div class="hero-img">
-            <img src="./main_picture%20.png" alt="Нурбаева Дияра Чингисовна">
+            <img src="./main_picture1.png" alt="Нурбаева Дияра Чингисовна">
           </div>
 
           <div class="divider"></div>
@@ -416,25 +436,96 @@
       </div>
     </section>
 
-    <!-- 2) Поздравление от мужчин -->
+    <!-- 2) Поздравление (обновлённый текст) -->
     <section id="congrats">
       <div class="card">
-        <div class="script h-script">От мужского коллектива</div>
-        <p class="p">
-          Дияра Чингисовна,<br>
-          примите самые тёплые и искренние поздравления<br>
-          с Международным женским днём — 8 Марта<br>
-          от мужского коллектива <b>Genesis Auto Almaty</b>.
-        </p>
-        <p class="p">
-          Желаем Вам гармонии, вдохновения и лёгкости в каждом дне.<br>
-          Пусть рядом всегда будут люди, которые ценят и поддерживают,<br>
-          а работа приносит радость и заслуженное признание.
-        </p>
+        <div class="script h-script">💐 Поздравление от мужского коллектива</div>
+
+        <div class="flow">
+          <p class="p">
+            Дияра Чингисовна,<br>
+            примите самые тёплые и искренние поздравления
+            с Международным женским днём — 8 Марта
+            от мужского коллектива <b>Genesis Auto Almaty</b>.
+          </p>
+
+          <p class="p">
+            Несмотря на то, что Вы присоединились к нашей команде относительно недавно,
+            Вы уже успели зарекомендовать себя как профессиональный, вдумчивый и уверенный маркетолог.
+          </p>
+
+          <p class="p">
+            Вы тонко чувствуете специфику бренда, прекрасно понимаете сферу нашей работы
+            и очень быстро стали частью коллектива, с которым легко и приятно работать.
+          </p>
+
+          <div class="subhead">🌷 О Вас</div>
+
+          <p class="p">
+            Ваша работа — это не просто выполнение задач, а умение видеть идею, смысл
+            и направление развития.
+          </p>
+
+          <p class="p">
+            Вы внимательно относитесь к деталям, чувствуете настроение бренда
+            и умеете находить решения, которые действительно работают.
+          </p>
+
+          <p class="p">
+            С Вами легко выстраивать коммуникацию, Вы быстро ориентируетесь в процессах
+            и уверенно движетесь к результату, сохраняя спокойствие и внутренний баланс.
+          </p>
+
+          <div class="subhead">✨ Немного личного штриха</div>
+
+          <p class="p">
+            Кроме профессионализма, в Вас есть то, что особенно подкупает —
+            умение вдохновляться.
+          </p>
+
+          <p class="p">
+            Ваша любовь к миру «Властелина колец» говорит о богатом воображении,
+            чувстве красоты, символов и историй.
+          </p>
+
+          <p class="p">
+            Возможно, именно поэтому Вам так хорошо удаётся видеть картину шире,
+            находить нестандартные решения и относиться к работе не формально, а с душой.
+          </p>
+
+          <div class="subhead">🌙 Очень короткая связка с астрологией</div>
+
+          <p class="p">
+            Как истинный Водолей, Вы сочетаете рациональное мышление
+            с творческим взглядом на задачи.
+          </p>
+
+          <p class="p">
+            Свобода идей, интерес к большим смыслам и стремление к развитию
+            естественно отражаются и в Вашей работе, и в том, как Вы воспринимаете мир.
+          </p>
+
+          <div class="subhead">🌸 Финал</div>
+
+          <p class="p">
+            Дияра Чингисовна, благодарим Вас за вклад в общее дело, за профессиональный подход
+            и за ту атмосферу, которую Вы уже успели создать в коллективе.
+          </p>
+
+          <p class="p">
+            Пусть впереди будет ещё много интересных проектов, вдохновения, уверенности в себе
+            и радости от того, чем Вы занимаетесь.
+          </p>
+
+          <p class="p">
+            С уважением и самыми тёплыми пожеланиями —
+            <b>мужской коллектив Genesis Auto Almaty</b> 💐
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 3) О ней -->
+    <!-- 3) О ней (кратко) -->
     <section id="about">
       <div class="card">
         <div class="script h-script">О Вас</div>
@@ -445,7 +536,6 @@
         <p class="p">
           Вы внимательны к деталям, умеете видеть общую картину и находить решения,
           которые действительно работают на результат.
-          С Вами легко взаимодействовать, комфортно работать и приятно достигать общих целей.
         </p>
 
         <div class="chips" aria-label="Профиль">
@@ -574,10 +664,6 @@
     <section id="final">
       <div class="card">
         <div class="script h-script">С теплом и уважением</div>
-        <p class="p">
-          Благодарим Вас за вклад в общую работу, за профессиональный подход
-          и за ту атмосферу, которую Вы создаёте в коллективе.
-        </p>
         <p class="p">
           Пусть будет больше вдохновения, уверенности в себе
           и поводов для искренней улыбки 💐
