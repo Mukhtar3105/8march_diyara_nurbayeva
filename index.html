@@ -77,8 +77,10 @@
       padding: 28px 18px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
+
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+
       overflow:hidden;
       z-index:1;
 
@@ -185,13 +187,16 @@
       justify-content:center;
       padding: 14px 26px;
       border-radius: 999px;
+
       background: linear-gradient(135deg, rgba(198,161,168,.92), rgba(181,143,152,.92));
       color:#fff !important;
+
       text-decoration:none !important;
       text-transform: uppercase;
       letter-spacing: .14em;
       font-size: 13px;
       font-family: "Cinzel", serif;
+
       box-shadow: var(--shadow2);
       border: 1px solid rgba(255,255,255,.52);
       cursor:pointer;
@@ -227,6 +232,7 @@
       font-family:"Cinzel", serif;
     }
 
+    /* Gallery / AI view */
     .gallery{
       margin-top: 14px;
       border-radius: 22px;
@@ -404,6 +410,7 @@
       font-family:"Cinzel", serif;
     }
 
+    /* Floating "up" button */
     .toTop{
       position:fixed;
       right: 16px;
@@ -529,18 +536,26 @@
       </div>
     </section>
 
-    <!-- 4) Галерея -->
+    <!-- 4) Как Вас видит ИИ (вместо "Галерея") -->
     <section id="gallery">
       <div class="card">
-        <div class="script h-script">Галерея</div>
+        <div class="script h-script">Как Вас видит ИИ</div>
 
-        <div class="gallery" aria-label="Галерея">
+        <p class="p" style="margin-top:6px;">
+          В этой подборке — образы и моменты, которые лучше всего передают Ваш характер:
+          светлая энергия, уверенность в задачах и тёплая улыбка, которая заряжает команду.
+        </p>
+        <p class="small" style="margin-top:10px;">
+          Листайте карточки — каждая из них про настроение, стиль и Вашу особенную атмосферу.
+        </p>
+
+        <div class="gallery" aria-label="Как Вас видит ИИ">
           <div class="g-stage" id="gStage">
-            <img src="./photo_1.png" alt="Фото 1" class="active">
-            <img src="./photo_2.png" alt="Фото 2">
-            <img src="./photo_3.png" alt="Фото 3">
-            <img src="./photo_4.png" alt="Фото 4">
-            <img src="./photo_5.png" alt="Фото 5">
+            <img src="./photo_1.png" alt="Образ 1" class="active">
+            <img src="./photo_2.png" alt="Образ 2">
+            <img src="./photo_3.png" alt="Образ 3">
+            <img src="./photo_4.png" alt="Образ 4">
+            <img src="./photo_5.png" alt="Образ 5">
           </div>
           <div class="g-controls">
             <button type="button" id="gPrev">Назад</button>
@@ -663,11 +678,13 @@
 
   </main>
 
+  <!-- Floating "up" button -->
   <div class="toTop" id="toTop">
     <a class="btn" href="#top">Наверх ↑</a>
   </div>
 
   <script>
+    // Smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         const id = a.getAttribute('href');
@@ -678,6 +695,7 @@
       });
     });
 
+    // Reveal cards on scroll
     (function revealCards(){
       const cards = Array.from(document.querySelectorAll('.card'));
       const io = new IntersectionObserver((entries)=>{
@@ -692,6 +710,7 @@
       if(cards[0]) cards[0].classList.add('revealed');
     })();
 
+    // Show "to top" button after some scroll
     (function toTop(){
       const btn = document.getElementById('toTop');
       window.addEventListener('scroll', ()=>{
@@ -700,8 +719,11 @@
       }, {passive:true});
     })();
 
+    // Gallery slider
     (function gallery(){
       const stage = document.getElementById('gStage');
+      if(!stage) return;
+
       const imgs = Array.from(stage.querySelectorAll('img'));
       const dotsWrap = document.getElementById('gDots');
       const prev = document.getElementById('gPrev');
@@ -709,6 +731,7 @@
       let i = 0;
 
       function buildDots(){
+        if(!dotsWrap) return;
         dotsWrap.innerHTML = '';
         imgs.forEach((_, idx)=>{
           const d = document.createElement('div');
@@ -719,18 +742,21 @@
       }
       function render(){
         imgs.forEach((img, idx)=> img.classList.toggle('active', idx===i));
-        Array.from(dotsWrap.children).forEach((d, idx)=> d.classList.toggle('on', idx===i));
+        if(dotsWrap){
+          Array.from(dotsWrap.children).forEach((d, idx)=> d.classList.toggle('on', idx===i));
+        }
       }
 
-      prev.addEventListener('click', ()=>{
+      if(prev) prev.addEventListener('click', ()=>{
         i = (i - 1 + imgs.length) % imgs.length;
         render();
       });
-      next.addEventListener('click', ()=>{
+      if(next) next.addEventListener('click', ()=>{
         i = (i + 1) % imgs.length;
         render();
       });
 
+      // swipe for mobile
       let x0 = null;
       stage.addEventListener('touchstart', e=>{ x0 = e.touches[0].clientX; }, {passive:true});
       stage.addEventListener('touchend', e=>{
@@ -738,7 +764,8 @@
         const x1 = e.changedTouches[0].clientX;
         const dx = x1 - x0;
         if(Math.abs(dx) > 35){
-          if(dx < 0) next.click(); else prev.click();
+          if(dx < 0 && next) next.click();
+          else if(dx > 0 && prev) prev.click();
         }
         x0 = null;
       }, {passive:true});
@@ -747,7 +774,7 @@
       render();
     })();
 
-    // Birthday countdown — 08 Feb
+    // Birthday countdown (every year) — 08 Feb
     const pad2 = n => String(n).padStart(2,'0');
 
     function nextBirthday(monthIndex, day){
@@ -759,7 +786,7 @@
     }
 
     function tickBirthday(){
-      const target = nextBirthday(1, 8); // Feb=1
+      const target = nextBirthday(1, 8); // Feb=1, day=8
       const now = new Date();
       let diff = target - now;
       if(diff < 0) diff = 0;
@@ -770,21 +797,29 @@
       const mins = Math.floor((sec % 3600) / 60);
       const secs = sec % 60;
 
-      document.getElementById('bDays').textContent  = pad2(days);
-      document.getElementById('bHours').textContent = pad2(hours);
-      document.getElementById('bMins').textContent  = pad2(mins);
-      document.getElementById('bSecs').textContent  = pad2(secs);
+      const elDays  = document.getElementById('bDays');
+      const elHours = document.getElementById('bHours');
+      const elMins  = document.getElementById('bMins');
+      const elSecs  = document.getElementById('bSecs');
+      if(!elDays || !elHours || !elMins || !elSecs) return;
+
+      elDays.textContent  = pad2(days);
+      elHours.textContent = pad2(hours);
+      elMins.textContent  = pad2(mins);
+      elSecs.textContent  = pad2(secs);
     }
 
     tickBirthday();
     setInterval(tickBirthday, 1000);
 
+    // Share / Copy link / Print
     (function actions(){
       const btnShare = document.getElementById('btnShare');
       const btnPrint = document.getElementById('btnPrint');
       const hint = document.getElementById('shareHint');
 
       function toast(){
+        if(!hint) return;
         hint.style.display = 'block';
         clearTimeout(window.__t);
         window.__t = setTimeout(()=> hint.style.display = 'none', 1600);
@@ -805,18 +840,23 @@
         }
       }
 
-      btnShare.addEventListener('click', async ()=>{
-        const data = { title: document.title, text: 'Поздравление с 8 Марта', url: location.href };
-        if(navigator.share){
-          try{ await navigator.share(data); } catch(e){}
-        }else{
-          await copyLink();
-        }
-      });
+      if(btnShare){
+        btnShare.addEventListener('click', async ()=>{
+          const data = { title: document.title, text: 'Поздравление с 8 Марта', url: location.href };
+          if(navigator.share){
+            try{ await navigator.share(data); } catch(e){}
+          }else{
+            await copyLink();
+          }
+        });
+      }
 
-      btnPrint.addEventListener('click', ()=> window.print());
+      if(btnPrint){
+        btnPrint.addEventListener('click', ()=> window.print());
+      }
     })();
 
+    // ✅ Download all images (под ваши имена файлов)
     (function downloadAll(){
       const btn = document.getElementById('btnDownloadAll');
       if(!btn) return;
